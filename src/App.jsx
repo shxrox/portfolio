@@ -14,7 +14,7 @@ function App() {
   return (
     <Routes>
    
-    <Route path="/Profile" element={<Home />} />
+    <Route index element={<Home />} /> 
     <Route path="*" element={<Error />} />
     </Routes>
  )
