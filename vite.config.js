@@ -22,7 +22,7 @@ import tailwindcss from "@tailwindcss/vite"
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: "/portfolio/", // 👈 ADD THIS LINE (Match your repo name exactly)
+  base: "/", // 👈 ADD THIS LINE (Match your repo name exactly)
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
