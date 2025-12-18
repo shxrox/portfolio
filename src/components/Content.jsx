@@ -5,7 +5,8 @@ import { Lock, ExternalLink, Bot, Code, Zap, List } from "lucide-react";
 import CardSwap, { Card } from './CardSwap';
 
 const projectData = [
-    { id: 1, name: "VoltVision | Energy System", url: "https://volt-vision.netlify.app/", status: "active", icon: Zap },
+    // { id: 1, name: "VoltVision | Energy System", url: "https://volt-vision.netlify.app/", status: "active", icon: Zap },
+    { id: 1, name: "VoltVision | Energy System", url: "https://volt-vision.netlify.app/", status: "locked", icon: Zap },
     { id: 2, name: "Next Project | AI Assistant", status: "locked", icon: Bot },
     { id: 3, name: "Future Project | Dev Tool", status: "locked", icon: Code },
 ];
