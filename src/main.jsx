@@ -1,15 +1,19 @@
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router";
 
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom' // <-- NEW IMPORT
-import './index.css'
-import App from './App.jsx'
+import "./index.css";
 
-createRoot(document.getElementById('root')).render(
+import Home from "./components/Home.jsx";
+import Error from "./components/Error.jsx";
+
+createRoot(document.getElementById("root")).render(
   <StrictMode>
-
-    <BrowserRouter> 
-      <App />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="*" element={<Error />} />
+      </Routes>
     </BrowserRouter>
-  </StrictMode>,
-)
+  </StrictMode>
+);

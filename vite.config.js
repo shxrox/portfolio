@@ -28,7 +28,7 @@ const __dirname = path.dirname(__filename);
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   // THIS IS THE SECRET SAUCE:
-  base: "/portfolio/", 
+  base: "/", 
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
