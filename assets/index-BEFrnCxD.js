@@ -1046,4 +1046,4 @@ Please change the parent <Route path="${A}"> to <Route path="${A==="/"?"*":`${A}
             font-size: 0.9rem;
           }
         }
-      `}),L.jsxs("div",{className:"error-page",children:[L.jsx("div",{className:"error-code",children:"404"}),L.jsx("div",{className:"error-message",children:"Oops! The page you are looking for doesn't exist."}),L.jsx(gm,{to:"/",className:"home-button",children:"Go Back Home"})]})]});function Y4(){return L.jsxs(cw,{children:[L.jsx(_d,{path:"/",element:L.jsx(U4,{})}),L.jsx(_d,{path:"*",element:L.jsx(H4,{})})]})}yE.createRoot(document.getElementById("root")).render(L.jsx(C.StrictMode,{children:L.jsx(kw,{children:L.jsx(Y4,{})})}));
+      `}),L.jsxs("div",{className:"error-page",children:[L.jsx("div",{className:"error-code",children:"404"}),L.jsx("div",{className:"error-message",children:"Oops! The page you are looking for doesn't exist."}),L.jsx(gm,{to:"/",className:"home-button",children:"Go Back Home"})]})]});yE.createRoot(document.getElementById("root")).render(L.jsx(C.StrictMode,{children:L.jsx(kw,{children:L.jsxs(cw,{children:[L.jsx(_d,{path:"/",element:L.jsx(U4,{})}),L.jsx(_d,{path:"*",element:L.jsx(H4,{})})]})})}));
