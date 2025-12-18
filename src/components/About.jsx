@@ -201,7 +201,7 @@ function About() {
 
           <div className="about-image" style={{ maxWidth: '400px', width: '100%' }}>
             <TiltedCard
-              imageSrc="../images/about-wm.jpeg"
+              imageSrc="./images/about-wm.jpeg"
               altText="Sharon"
               captionText="Sharon"
               rotateAmplitude={12}
