@@ -2,7 +2,7 @@
 // import React from "react";
 // import { Github, Linkedin } from "lucide-react";
 
-// import NavIcon from "./NavIcon"; 
+// import NavIcon from "./NavIcon";
 // import Message from "./Message";
 // import About from "./About";
 // import StackKeyboard from "./Stack";
@@ -16,7 +16,7 @@
 //   return (
 //     <>
 //       <style>{`
-       
+//         /* ================= HERO BACKGROUND ================= */
 //         .wave-bg {
 //           background: linear-gradient(135deg, #BA0707, #020202);
 //           background-size: 300% 300%;
@@ -59,8 +59,19 @@
 //         }
 
 //         @media (min-width: 768px) {
-//           .main-text { font-size: 7rem; text-align: left; }
-//           .text-container { align-items: flex-start; }
+//           .wave-bg {
+//             flex-direction: row;
+//             padding: 3rem;
+//           }
+
+//           .main-text {
+//             font-size: 7rem;
+//             text-align: left;
+//           }
+
+//           .text-container {
+//             align-items: flex-start;
+//           }
 //         }
 
 //         @media (min-width: 1024px) {
@@ -107,7 +118,7 @@
 //           align-items: center;
 //         }
 
-//         /* MOBILE IMAGE */
+//         /* MOBILE IMAGE (ROUND) */
 //         .image-container img {
 //           width: 220px;
 //           height: 220px;
@@ -115,13 +126,8 @@
 //           object-fit: cover;
 //         }
 
-//         /* DESKTOP PNG IMAGE */
+//         /* TABLET + DESKTOP BASE */
 //         @media (min-width: 768px) {
-//           .wave-bg {
-//             flex-direction: row;
-//             padding: 3rem;
-//           }
-
 //           .image-container img {
 //             width: 420px;
 //             height: auto;
@@ -131,9 +137,22 @@
 //           }
 //         }
 
+//         /* ================= BIGGER IMAGE ON LARGE SCREENS ================= */
 //         @media (min-width: 1024px) {
 //           .image-container img {
-//             width: 520px;
+//             width: 620px;
+//           }
+//         }
+
+//         @media (min-width: 1280px) {
+//           .image-container img {
+//             width: 700px;
+//           }
+//         }
+
+//         @media (min-width: 1536px) {
+//           .image-container img {
+//             width: 780px;
 //           }
 //         }
 
@@ -158,7 +177,7 @@
 //             Hi, I am <span className="shine">Sharon</span>
 //           </h1>
 
-//           {/* SOCIAL ICONS BELOW NAME */}
+//           {/* SOCIAL ICONS */}
 //           <div className="social-icons">
 //             <a
 //               href="https://github.com/shxrox"
@@ -199,7 +218,7 @@
 
 // export default Home;
 import React from "react";
-import { Github, Linkedin } from "lucide-react";
+import { Github, Linkedin, ArrowDown } from "lucide-react";
 
 import NavIcon from "./NavIcon";
 import Message from "./Message";
@@ -212,6 +231,14 @@ import ContactCard from "./ContactCard";
 import Footer from "./Footer";
 
 function Home() {
+  // 1. Function moved INSIDE the component
+  const handleScrollToContact = () => {
+    const section = document.getElementById("contact");
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <>
       <style>{`
@@ -297,16 +324,44 @@ function Home() {
           display: flex;
           gap: 1.5rem;
           margin-top: 1.5rem;
+          align-items: center;
         }
 
-        .social-icons a {
+        .social-icons a.icon-link {
           color: white;
           transition: 0.3s ease;
+          display: flex;
         }
 
-        .social-icons a:hover {
+        .social-icons a.icon-link:hover {
           color: #ff0000;
           transform: translateY(-4px) scale(1.1);
+        }
+
+        /* ================= CONTACT BUTTON STYLE ================= */
+        /* Updated to support <button> tag */
+        .contact-btn {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          padding: 0.6rem 1.5rem;
+          border: 2px solid white;
+          border-radius: 50px;
+          color: white;
+          text-decoration: none;
+          font-weight: 700;
+          font-size: 1rem;
+          transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+          background: rgba(0,0,0,0.2); 
+          cursor: pointer; /* Ensure pointer cursor shows */
+          font-family: inherit; /* Inherit font from parent */
+        }
+
+        .contact-btn:hover {
+          background: #ff0000;
+          border-color: #ff0000;
+          transform: translateY(-4px);
+          box-shadow: 0 5px 15px rgba(255, 0, 0, 0.4);
         }
 
         /* ================= IMAGE ================= */
@@ -317,7 +372,6 @@ function Home() {
           align-items: center;
         }
 
-        /* MOBILE IMAGE (ROUND) */
         .image-container img {
           width: 220px;
           height: 220px;
@@ -325,7 +379,6 @@ function Home() {
           object-fit: cover;
         }
 
-        /* TABLET + DESKTOP BASE */
         @media (min-width: 768px) {
           .image-container img {
             width: 420px;
@@ -336,7 +389,6 @@ function Home() {
           }
         }
 
-        /* ================= BIGGER IMAGE ON LARGE SCREENS ================= */
         @media (min-width: 1024px) {
           .image-container img {
             width: 620px;
@@ -364,24 +416,22 @@ function Home() {
         }
       `}</style>
 
-      {/* NAV */}
       <div className="navbar-fixed">
         <NavIcon />
       </div>
 
-      {/* HERO */}
       <div className="wave-bg">
         <div className="text-container">
           <h1 className="main-text">
             Hi, I am <span className="shine">Sharon</span>
           </h1>
 
-          {/* SOCIAL ICONS */}
           <div className="social-icons">
             <a
               href="https://github.com/shxrox"
               target="_blank"
               rel="noopener noreferrer"
+              className="icon-link"
             >
               <Github size={34} />
             </a>
@@ -390,26 +440,39 @@ function Home() {
               href="https://www.linkedin.com/in/sharon-devasudan-1038b72a3"
               target="_blank"
               rel="noopener noreferrer"
+              className="icon-link"
             >
               <Linkedin size={34} />
             </a>
+
+            {/* --- FIXED CONTACT BUTTON --- */}
+            <button 
+              className="contact-btn" 
+              onClick={handleScrollToContact}
+            >
+              <span>CONTACT ME</span>
+              <ArrowDown size={20} />
+            </button>
           </div>
         </div>
 
-        {/* IMAGE */}
         <div className="image-container">
           <img src="./images/profile-bg-wm.png" alt="Sharon" />
         </div>
       </div>
 
-      {/* OTHER SECTIONS */}
       <Message />
       <About />
       <StackKeyboard />
       <StackLoop />
       <Content />
       <Gallery />
-      <ContactCard />
+
+      {/* --- ADDED ID HERE SO SCROLL KNOWS WHERE TO GO --- */}
+      <div id="contact">
+        <ContactCard />
+      </div>
+
       <Footer />
     </>
   );
