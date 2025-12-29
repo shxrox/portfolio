@@ -1,5 +1,4 @@
 
-
 // import React, { useState } from "react";
 // import emailjs from "@emailjs/browser";
 // import { ToastContainer, toast, Slide } from "react-toastify";
@@ -79,6 +78,7 @@
 //           rows="8"
 //         />
 
+//         {/* BUTTON UPDATED TO MATCH LIST-VIEW BUTTON STYLE */}
 //         <button type="submit" disabled={loading} className="send-btn-massive">
 //           {loading ? "SENDING..." : "SEND MESSAGE"}
 //         </button>
@@ -107,7 +107,7 @@
 
 //         .contact-header h2 {
 //           font-size: clamp(3rem, 10vw, 5.5rem);
-//           color: #ffffff; /* FIXED: white */
+//           color: #ffffff;
 //           font-weight: 900;
 //           line-height: 0.95;
 //           letter-spacing: -3px;
@@ -119,7 +119,7 @@
 //         }
 
 //         .contact-header p {
-//           color: #ffffff; /* FIXED: white */
+//           color: #ffffff;
 //           font-size: 1.35rem;
 //           margin-top: 1.2rem;
 //           opacity: 0.85;
@@ -148,7 +148,7 @@
 //           outline: none;
 //           width: 100%;
 //           box-sizing: border-box;
-//           border-radius: 10px; /* NEW: subtle radius */
+//           border-radius: 10px;
 //           transition: 0.3s ease;
 //         }
 
@@ -159,38 +159,39 @@
 //           font-weight: 700;
 //         }
 
-//         .contact-form-massive input,
-//         .contact-form-massive textarea {
-//           background-color: #111 !important;
-//           color: #fff;
-//         }
-        
-//         .contact-form-massive input:-webkit-autofill,
-//         .contact-form-massive input:-webkit-autofill:hover,
-//         .contact-form-massive input:-webkit-autofill:focus {
+//         .contact-form-massive input:-webkit-autofill {
 //           -webkit-text-fill-color: #fff;
 //           -webkit-box-shadow: 0 0 0px 1000px #111 inset;
-//           transition: background-color 9999s ease-in-out 0s;
 //         }
-        
 
-//         /* BUTTON */
+//         /* BUTTON: EXACT MATCH TO LIST-VIEW BUTTON STYLE */
 //         .send-btn-massive {
 //           background-color: #ffffff;
 //           color: #000000;
 //           font-weight: 900;
-//           padding: 2rem;
-//           font-size: 1.4rem;
+//           padding: 1.2rem 2.5rem; /* Matched padding */
+//           font-size: 1.1rem; /* Matched size */
 //           letter-spacing: 2px;
 //           cursor: pointer;
 //           border: none;
-//           border-radius: 12px; /* NEW: subtle radius */
-//           transition: 0.3s ease;
+//           border-radius: 12px; /* Matched radius */
+//           transition: 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+//           text-transform: uppercase;
+//           width: fit-content; /* Makes it act like the toggle button */
+//           align-self: flex-start; /* Aligns to left like a card-side button */
 //         }
 
 //         .send-btn-massive:hover:not(:disabled) {
-//           background-color: #ffff80;
+//           background-color: #e22c2c;
 //           transform: translateY(-5px);
+
+//           color: white;
+//           box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+//         }
+
+//         .send-btn-massive:disabled {
+//           opacity: 0.5;
+//           cursor: not-allowed;
 //         }
 
 //         /* TOAST */
@@ -206,12 +207,14 @@
 //           .input-row {
 //             grid-template-columns: 1fr;
 //           }
-
+//           .send-btn-massive {
+//             width: 100%; /* Full width on mobile for better UX */
+//             align-self: center;
+//           }
 //           .contact-header h2 {
 //             font-size: 3.5rem;
 //             text-align: center;
 //           }
-
 //           .contact-header p {
 //             text-align: center;
 //           }
@@ -222,14 +225,13 @@
 // };
 
 // export default ContactForm;
+
 import React, { useState } from "react";
-import emailjs from "@emailjs/browser";
 import { ToastContainer, toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
-  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -237,33 +239,33 @@ const ContactForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // 1. Validation
     if (!formData.name || !formData.email || !formData.message) {
       toast.error("Please fill in all fields!", { className: "custom-toast" });
       return;
     }
 
-    setLoading(true);
+    // 2. Configuration: REPLACE THIS WITH YOUR EMAIL
+    const myEmail = "your-email@example.com"; 
 
-    const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-    const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-    const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+    // 3. Construct the email details
+    const subject = `Contact form submission from ${formData.name}`;
+    const body = `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`;
 
-    emailjs.send(SERVICE_ID, TEMPLATE_ID, formData, PUBLIC_KEY).then(
-      () => {
-        toast.success("🎉 Message sent! I’ll reply soon.", {
-          className: "custom-toast",
-        });
-        setFormData({ name: "", email: "", message: "" });
-        setLoading(false);
-      },
-      (error) => {
-        console.error(error);
-        toast.error("Something went wrong. Try again.", {
-          className: "custom-toast",
-        });
-        setLoading(false);
-      }
-    );
+    // 4. Create mailto link
+    const mailtoLink = `mailto:${myEmail}?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(body)}`;
+
+    // 5. Open the email client
+    window.location.href = mailtoLink;
+
+    toast.success("Opening your email client...", {
+      className: "custom-toast",
+    });
+    
+    // Optional: Clear form after opening
+    setFormData({ name: "", email: "", message: "" });
   };
 
   return (
@@ -301,9 +303,8 @@ const ContactForm = () => {
           rows="8"
         />
 
-        {/* BUTTON UPDATED TO MATCH LIST-VIEW BUTTON STYLE */}
-        <button type="submit" disabled={loading} className="send-btn-massive">
-          {loading ? "SENDING..." : "SEND MESSAGE"}
+        <button type="submit" className="send-btn-massive">
+          SEND MESSAGE
         </button>
       </form>
 
@@ -387,34 +388,28 @@ const ContactForm = () => {
           -webkit-box-shadow: 0 0 0px 1000px #111 inset;
         }
 
-        /* BUTTON: EXACT MATCH TO LIST-VIEW BUTTON STYLE */
+        /* BUTTON */
         .send-btn-massive {
           background-color: #ffffff;
           color: #000000;
           font-weight: 900;
-          padding: 1.2rem 2.5rem; /* Matched padding */
-          font-size: 1.1rem; /* Matched size */
+          padding: 1.2rem 2.5rem;
+          font-size: 1.1rem;
           letter-spacing: 2px;
           cursor: pointer;
           border: none;
-          border-radius: 12px; /* Matched radius */
+          border-radius: 12px;
           transition: 0.3s cubic-bezier(0.23, 1, 0.32, 1);
           text-transform: uppercase;
-          width: fit-content; /* Makes it act like the toggle button */
-          align-self: flex-start; /* Aligns to left like a card-side button */
+          width: fit-content;
+          align-self: flex-start;
         }
 
-        .send-btn-massive:hover:not(:disabled) {
+        .send-btn-massive:hover {
           background-color: #e22c2c;
           transform: translateY(-5px);
-
           color: white;
           box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-        }
-
-        .send-btn-massive:disabled {
-          opacity: 0.5;
-          cursor: not-allowed;
         }
 
         /* TOAST */
@@ -431,7 +426,7 @@ const ContactForm = () => {
             grid-template-columns: 1fr;
           }
           .send-btn-massive {
-            width: 100%; /* Full width on mobile for better UX */
+            width: 100%;
             align-self: center;
           }
           .contact-header h2 {
