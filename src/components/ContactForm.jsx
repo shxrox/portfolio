@@ -304,7 +304,7 @@ const ContactForm = () => {
         />
 
         <button type="submit" className="send-btn-massive">
-          SEND MESSAGE
+          SEND MESSAGE updated
         </button>
       </form>
 
