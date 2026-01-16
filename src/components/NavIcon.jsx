@@ -77,6 +77,12 @@ const NavIcon = () => {
     section?.scrollIntoView({ behavior: "smooth" });
   };
 
+    const handleScrollToCertificate = () => {
+    setIsOpen(false);
+    const section = document.getElementById("certificate");
+    section?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <>
       {/* MENU BUTTON */}
@@ -119,7 +125,6 @@ const NavIcon = () => {
             >
               Own Projects
             </li>
-
 
             <li
               className="cursor-pointer hover:text-red-500 transition-all"

@@ -230,6 +230,7 @@ import Content from "./Content";
 import ContactCard from "./ContactCard";
 import Footer from "./Footer";
 
+
 function Home() {
   // 1. Function moved INSIDE the component
   const handleScrollToContact = () => {
@@ -468,7 +469,7 @@ function Home() {
       <Content />
       <Gallery />
 
-      {/* --- ADDED ID HERE SO SCROLL KNOWS WHERE TO GO --- */}
+     
       <div id="contact">
         <ContactCard />
       </div>
